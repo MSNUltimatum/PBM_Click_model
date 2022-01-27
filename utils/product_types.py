@@ -1,4 +1,4 @@
-from typing import List, Tuple, NoReturn
+from typing import List, NoReturn
 
 
 class Session(object):
@@ -21,11 +21,3 @@ class Result(object):
 
     def update(self, click: int) -> NoReturn:
         self.is_clicked: int = click
-
-
-class Utils:
-    @staticmethod
-    def split_sessions(sessions: List[Session], training_length: float) -> Tuple[Session, Session]:
-        training_session_length: int = int(len(sessions) * training_length)
-        train_sessions: List[Session] = sessions[:training_session_length]
-

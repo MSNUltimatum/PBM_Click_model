@@ -1,6 +1,6 @@
 from typing import TextIO, List
 
-from utils.Utils import Session, Result
+from utils.product_types import Session, Result
 
 
 class YandexDataParser:
