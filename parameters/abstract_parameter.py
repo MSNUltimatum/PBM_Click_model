@@ -19,8 +19,18 @@ class ClickModelParameter(object):
 
 
 class SessionParamsContainer(object):
-    def __init__(self, default_dict_function: Callable[[], Any]):
-        self.session_params: DefaultDict = defaultdict(default_dict_function)
+    def __init__(self):
+        self.session_params: DefaultDict[int, Dict[str, ClickModelParameter]] = defaultdict(lambda: dict())
+
+    def append(self, elem: Dict[int, Dict[str, ClickModelParameter]]):
+        self.session_params.update(elem)
+
+    def get_at_rank(self, rank: int) -> Dict[str, ClickModelParameter]:
+        return self.session_params[rank]
+
+    def update_at_rank(self, rank: int, result: Result, original_params):
+        for _, param in self.get_at_rank(rank).items():
+            param.update(result, original_params.get_at_rank(rank))
 
 
 class QueryDocumentAttr(object):
@@ -37,7 +47,7 @@ class RangeAttr(object):
     def __init__(self, cls):
         self.MAX_RANGE = 10
         self.target_class = cls
-        self._attrs: List[cls] = [cls() for i in range(self.MAX_RANGE)]
+        self._attrs: List[cls] = [cls() for _ in range(self.MAX_RANGE)]
 
     def get_attr_for_rank(self, rank: int):
         if rank > self.MAX_RANGE:

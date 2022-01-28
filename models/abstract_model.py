@@ -18,5 +18,6 @@ class ClickModel(object):
     def get_conditional_probability(self, session: Session):
         raise NotImplemented
 
+    @abstractmethod
     def get_session_parameters(self, session: Session) -> SessionParamsContainer:
-        pass
+        raise NotImplemented
