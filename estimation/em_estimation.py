@@ -18,7 +18,7 @@ class EMEstimation(object):
         start_click_model: ClickModel = copy.deepcopy(click_model)
 
         for _ in range(self.iteration_count):
-            training_model: ClickModel = copy.deepcopy(click_model)
+            training_model: ClickModel = copy.deepcopy(start_click_model)
 
             for session in training_ds:
                 original_params: SessionParamsContainer = original_model.get_session_parameters(session)
@@ -27,4 +27,5 @@ class EMEstimation(object):
                 for rank, result in enumerate(session.search_results):
                     training_params.update_at_rank(rank, result, original_params)
 
-            original_model. = training_params.params
+            original_model.set_params(training_model.params())
+        return original_model

@@ -21,3 +21,11 @@ class ClickModel(object):
     @abstractmethod
     def get_session_parameters(self, session: Session) -> SessionParamsContainer:
         raise NotImplemented
+
+    @abstractmethod
+    def params(self):
+        raise NotImplemented
+
+    @abstractmethod
+    def set_params(self, params):
+        raise NotImplemented

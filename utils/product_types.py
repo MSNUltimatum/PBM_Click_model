@@ -21,3 +21,6 @@ class Result(object):
 
     def update(self, click: int) -> NoReturn:
         self.is_clicked: int = click
+
+    def __str__(self):
+        return f"{self.result_id} {self.is_clicked}"
